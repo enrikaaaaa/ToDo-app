@@ -13,10 +13,11 @@
 }
 
 .formContainer {
-  width: 500px;
+  width: 30rem;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .formTitle {
@@ -33,17 +34,8 @@
 }
 
 .fullWidthTextField {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.loginButton {
-  display: block;
-  width: 100%;
-  background-color: rgba(122, 64, 7, 0.4);
-  &:hover {
-    background-color: rgba(86, 45, 5, 0.7);
-  }
+  width: calc(100% - 2rem);
+  margin-bottom: 2rem;
 }
 
 .errorText {

@@ -1,6 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
+import Button from '../../components/Button/Button';
 import { ROUTES } from '../../routes/consts';
+import TextField from '@mui/material/TextField';
 import { fetchUsers } from '../../api/users';
 import styles from './Login.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -40,9 +42,11 @@ const LoginForm = () => {
             <h2 className={styles.formTitle}>Login</h2>
             <Field
               name="email"
+              as={TextField}
               className={styles.fullWidthTextField}
               label="Email"
               type="email"
+              fullWidth
             />
             <ErrorMessage
               name="email"
@@ -51,18 +55,20 @@ const LoginForm = () => {
             />
             <Field
               name="password"
+              as={TextField}
               className={styles.fullWidthTextField}
               label="Password"
               type="password"
+              fullWidth
             />
             <ErrorMessage
               name="password"
               component="div"
               className={styles.errorText}
             />
-            <button type="submit" className={styles.loginButton}>
+            <Button type="submit" className={styles.loginButton}>
               Log In
-            </button>
+            </Button>
             <div className={styles.registerContainer}>
               <h5>Not registered? Contact your boss</h5>
             </div>
