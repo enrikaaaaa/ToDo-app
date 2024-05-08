@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
 
+import { Button, TextField } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import PropTypes from 'prop-types';
-import TextField from '@mui/material/TextField';
+import { createUser } from '../../api/users';
 import styles from './UserForm.module.scss';
 
 const UserForm = ({ handleSubmit }) => {
@@ -18,6 +19,21 @@ const UserForm = ({ handleSubmit }) => {
     Position: Yup.string().required('Position is required'),
   });
 
+  const submitForm = async (values, { setSubmitting }) => {
+    try {
+      const newUser = {
+        email: values.Email,
+        password: values.Password,
+      };
+      await createUser(newUser);
+      console.log('Form Data Sent:', values);
+      setSubmitting(false);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -29,7 +45,7 @@ const UserForm = ({ handleSubmit }) => {
         Position: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit || submitForm}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -56,7 +72,7 @@ const UserForm = ({ handleSubmit }) => {
           </div>
           <div className={styles.inputContainer}>
             <Field
-              type="text"
+              type="password"
               name="Password"
               placeholder="Password"
               as={TextField}
@@ -101,9 +117,9 @@ const UserForm = ({ handleSubmit }) => {
               className={styles.errorMessage}
             />
           </div>
-          <button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting} variant="contained">
             Submit
-          </button>
+          </Button>
         </Form>
       )}
     </Formik>
@@ -111,7 +127,7 @@ const UserForm = ({ handleSubmit }) => {
 };
 
 UserForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
 };
 
 export default UserForm;

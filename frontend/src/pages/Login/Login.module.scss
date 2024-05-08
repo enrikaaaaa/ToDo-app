@@ -34,7 +34,8 @@
 }
 
 .fullWidthTextField {
-  width: 100%;
+  width: calc(100% - 2rem);
+  margin-bottom: 2rem;
 }
 
 .errorText {
@@ -50,8 +51,4 @@
   align-items: center;
   margin: 10px;
   gap: 10px;
-}
-
-.MuiInputBase-root {
-  margin-bottom: 2rem;
 }
