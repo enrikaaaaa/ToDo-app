@@ -31,23 +31,36 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.delete("/users/:id", async (req, res) => {
+router.delete("/user/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const db = await connectToDB();
-    const result = await db
-      .collection("users")
-      .deleteOne({ _id: new ObjectId(id) });
-
+    const result = await db.collection("users").deleteOne({ _id: new ObjectId(id) });
     if (result.deletedCount === 0) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
-
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+
+router.get("/user/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = await connectToDB();
+    const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 
 module.exports = router;

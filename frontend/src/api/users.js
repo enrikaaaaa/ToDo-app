@@ -10,7 +10,7 @@ export const createUser = (newUser) =>
 export const fetchUserById = (id) =>
   axios.get(`${API}/users/${id}`).then((response) => response.data);
 
-export const deleteUser = (id) => axios.delete(`${API}/users/${id}`);
+export const deleteUser = (id) => axios.delete(`${API}/user/${id}`);
 
 export const updateUser = (userId, updatedData) =>
   axios
