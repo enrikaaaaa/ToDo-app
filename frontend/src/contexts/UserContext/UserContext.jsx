@@ -1,20 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const isLoggedInInitial = !!localStorage.getItem('user');
+  const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInInitial);
 
-  const isLoggedIn = !!user;
-
-  const handleLogin = (user) => {
-    setUser(user);
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsLoggedIn(true);
   };
 
   const handleLogOut = () => {
     setUser(null);
+    setIsLoggedIn(false);
+    localStorage.removeItem('user');
   };
 
   return (
