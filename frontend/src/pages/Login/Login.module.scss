@@ -1,0 +1,62 @@
+.containerLogin {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-image: url(../../src/assets/pictures/hero.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.formContainer {
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.formTitle {
+  font-size: 30px;
+  color: #452005;
+  font-weight: bold;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 40px;
+  font-family: 'Pacifico', cursive;
+}
+
+.fullWidthTextField {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.loginButton {
+  display: block;
+  width: 100%;
+  background-color: rgba(122, 64, 7, 0.4);
+  &:hover {
+    background-color: rgba(86, 45, 5, 0.7);
+  }
+}
+
+.errorText {
+  color: red;
+  font-size: 12px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.registerContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px;
+  gap: 10px;
+}

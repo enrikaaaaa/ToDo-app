@@ -1,17 +1,24 @@
-import { ROUTES, navigationBarLinks } from '../../routes/consts';
 import { useContext, useState } from 'react';
 
 import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext/UserContext';
+import { navigationBarLinks } from '../../routes/consts';
 import styles from './NavigationBar.module.scss';
 
 const NavigationBar = () => {
+  const { isLoggedIn } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
-  const { user, isLoggedIn } = useContext(UserContext);
+  const storedUser = localStorage.getItem('user');
+  const user = storedUser ? JSON.parse(storedUser) : null;
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem('user');
+    window.location.href = '/';
   };
 
   return (
@@ -25,20 +32,17 @@ const NavigationBar = () => {
         <ul
           className={showMenu ? `${styles.menu} ${styles.show}` : styles.menu}
         >
-          {/* <div className={styles.logo}>
-            <img src="../../src/assets/pictures/logo.png" alt="Logo" />
-          </div> */}
           {navigationBarLinks.map((link) => (
-            <Link key={link.path} to={link.path}>
-              {link.title}
-            </Link>
+            <li key={link.path}>
+              <Link to={link.path}>{link.title}</Link>
+            </li>
           ))}
         </ul>
         <div>
-          <div>Hello, {isLoggedIn ? user.name : 'Guest'}!</div>
-          <Link to={ROUTES.LOGIN}>
-            <Button>{isLoggedIn ? 'LogOut' : 'Login'}</Button>
-          </Link>
+          <div>Hello, {isLoggedIn && user ? user.Name : 'Guest'}!</div>
+          <Button $InfoButton onClick={isLoggedIn ? handleLogOut : null}>
+            {isLoggedIn ? 'LogOut' : 'Login'}
+          </Button>
         </div>
       </nav>
     </header>

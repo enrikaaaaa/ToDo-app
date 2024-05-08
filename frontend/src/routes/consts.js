@@ -1,12 +1,14 @@
 import AuthLayout from '../layouts/AuthLayout';
 import BasicLayout from '../layouts/BasicLayout';
 import Login from '../pages/Login/Login';
+import Tasks from '../pages/Tasks/Tasks';
 import Users from '../pages/Users/Users';
 
 export const ROUTES = {
   LOGIN: '/',
   REGISTER: '/register',
   USERS: '/users',
+  TASKS: '/tasks/',
 };
 
 export const routes = [
@@ -21,11 +23,20 @@ export const routes = [
     Component: Users,
     Layout: BasicLayout,
   },
+  {
+    path: ROUTES.TASKS,
+    Component: Tasks,
+    Layout: BasicLayout,
+  },
 ];
 
 export const navigationBarLinks = [
   {
     title: 'Users',
     path: ROUTES.USERS,
+  },
+  {
+    title: 'Tasks',
+    path: ROUTES.TASKS,
   },
 ];
