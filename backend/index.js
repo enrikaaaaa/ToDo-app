@@ -23,61 +23,6 @@ const connectDB = async (req, res, next) => {
 
 app.use(connectDB);
 
-app.get("/tasks", async (req, res) => {
-  try {
-    const data = await req.dbClient
-      .db("ToDo")
-      .collection("tasks")
-      .find()
-      .toArray();
-    return res.send(data);
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-app.post("/tasks", async (req, res) => {
-  try {
-    const dbRes = await req.dbClient
-      .db("ToDo")
-      .collection("tasks")
-      .insertOne(req.body);
-    return res.send(dbRes);
-  } catch (error) {
-    console.error("Error creating task:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-app.delete("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const dbRes = await req.dbClient
-      .db("ToDo")
-      .collection("tasks")
-      .deleteOne({ _id: new ObjectId(id) });
-    return res.send(dbRes);
-  } catch (error) {
-    console.error("Error deleting task:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-app.get("/users", async (req, res) => {
-  try {
-    const data = await req.dbClient
-      .db("ToDo")
-      .collection("users")
-      .find()
-      .toArray();
-    return res.send(data);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
