@@ -1,33 +1,24 @@
-import Button from './Button';
-
-export default {
-  title: 'Components/Button',
-  component: Button,
-};
-
-export const DefaultButton = {
+export const Default = {
   args: {
     children: 'Button',
   },
 };
 
-export const PrimaryButton = {
+export const primary = {
   args: {
     children: 'Primary button',
-    primary: true,
+    info: true,
   },
 };
 
-export const DangerButton = {
+export const danger = {
   args: {
     children: 'Danger button',
-    danger: true,
   },
 };
 
-export const InfoButton = {
+export const info = {
   args: {
     children: 'Info button',
-    info: true,
   },
 };

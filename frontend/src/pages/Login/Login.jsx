@@ -24,7 +24,7 @@ const LoginForm = () => {
       );
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
-        navigate(ROUTES.USERS);
+        navigate(ROUTES.TASKS);
       } else {
         alert('User not found or invalid credentials');
       }

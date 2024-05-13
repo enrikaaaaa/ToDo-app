@@ -1,57 +1,123 @@
-import { ObjectId } from "mongodb";
-import { Router } from "express";
-import connectToDB from "../config/db";
+const express = require("express");
+require("dotenv").config();
+const { MongoClient, ObjectId } = require("mongodb");
 
-const router = Router();
+const router = express.Router();
+const URI = process.env.MONGO_URL;
+const client = new MongoClient(URI);
+
+router.post("/tasks", async (req, res) => {
+  try {
+    await client.connect();
+    const data = await client
+      .db("ToDo")
+      .collection("tasks")
+      .insertOne({ ...req.body });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
+  }
+});
 
 router.get("/tasks", async (req, res) => {
   try {
-    const db = await connectToDB();
-    const tasks = await db.collection("tasks").find().toArray();
-    res.json(tasks);
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
-    res.status(500).json({ message: "Internal server error" });
+    await client.connect();
+
+    const data = await client
+      .db("ToDo")
+      .collection("tasks")
+      .aggregate([
+        {
+          $lookup: {
+            from: "priority",
+            localField: "priority",
+            foreignField: "_id",
+            as: "priorityData",
+          },
+        },
+        {
+          $unwind: "$priorityData",
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "assignedTo",
+            foreignField: "_id",
+            as: "userData",
+          },
+        },
+        {
+          $unwind: "$userData",
+        },
+        {
+          $project: {
+            _id: 1,
+            Title: 1,
+            Description: 1,
+            StartDate: 1,
+            EndDate: 1,
+            status: 1,
+            priority: "$priorityData.Name",
+            assignedTo: {
+              $concat: [
+                { $substr: ["$userData.Name", 0, 1] },
+                { $substr: ["$userData.LastName", 0, 1] },
+              ],
+            },
+          },
+        },
+      ])
+      .toArray();
+
+    await client.close();
+
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
 router.put("/tasks/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "Invalid task ID format" });
-    }
-
-    const db = await connectToDB();
-    const updatedTask = req.body;
-    const data = await db
+    await client.connect();
+    const data = await client
+      .db("ToDo")
       .collection("tasks")
-      .updateOne({ _id: new ObjectId(id) }, { $set: updatedTask });
+      .updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ error: err.message });
+  }
+});
 
-    res.json(data);
-  } catch (error) {
-    console.error("Error updating task:", error);
-    res.status(500).json({ message: "Internal server error" });
+router.get("/tasks/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const data = await client
+      .db("ToDo")
+      .collection("tasks")
+      .findOne({ _id: new ObjectId(req.params.id) });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
 router.delete("/tasks/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "Invalid task ID format" });
-    }
-
-    const db = await connectToDB();
-    const data = await db
+    await client.connect();
+    const data = await client
+      .db("ToDo")
       .collection("tasks")
-      .deleteOne({ _id: new ObjectId(id) });
-
-    res.json(data);
-  } catch (error) {
-    console.error("Error deleting task:", error);
-    res.status(500).json({ message: "Internal server error" });
+      .deleteOne({ _id: new ObjectId(req.params.id) });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
-export default router;
+module.exports = router;

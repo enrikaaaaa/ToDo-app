@@ -1,5 +1,8 @@
 .container {
-  padding: 20px;
-  border: 1px solid #ccc;
   height: 100vh;
+}
+body {
+  background-image: url('../../src/assets/pictures/to_do.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
