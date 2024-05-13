@@ -15,7 +15,7 @@ import {
 } from '../../api/tasks';
 import { useEffect, useState } from 'react';
 
-import CreateNewTask from './CreateNewTask';
+import CreateNewTask from '../Tasks/CreateNewTask/CreateNewTask';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DoneIcon from '@mui/icons-material/Done';
 import { Modal } from '@mui/material';

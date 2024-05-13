@@ -5,9 +5,9 @@ import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { createTask } from '../../api/tasks';
-import { fetchPriority } from '../../api/priority';
-import { fetchUsers } from '../../api/users';
+import { createTask } from '../../../api/tasks';
+import { fetchPriority } from '../../../api/priority';
+import { fetchUsers } from '../../../api/users';
 import styles from './CreateNewTask.module.scss';
 
 const CreateNewTask = ({ handleClose }) => {
