@@ -3,8 +3,9 @@ import * as Yup from 'yup';
 import { Button, TextField } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PropTypes from 'prop-types';
-import { createUser } from '../../api/users';
+import { createUser } from '../../.../../../api/users';
 import styles from './UserForm.module.scss';
 
 const UserForm = ({ handleSubmit }) => {
@@ -117,8 +118,14 @@ const UserForm = ({ handleSubmit }) => {
               className={styles.errorMessage}
             />
           </div>
-          <Button type="submit" disabled={isSubmitting} variant="contained">
-            Submit
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isSubmitting}
+            startIcon={<PersonAddIcon />}
+            className={styles.addButton}
+          >
+            Add User
           </Button>
         </Form>
       )}

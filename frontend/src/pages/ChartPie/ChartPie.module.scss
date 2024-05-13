@@ -1,0 +1,15 @@
+$color-to-do: #b7e4c7;
+$color-in-progress: #f5ecc3;
+$color-done: #e0e0e0;
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  gap: 50px;
+}
+
+.pieChart {
+  width: 300px;
+}

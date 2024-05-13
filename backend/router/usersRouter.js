@@ -1,66 +1,78 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const { ObjectId } = require("mongodb");
-const connectToDB = require("../config/db");
+require("dotenv").config();
+const { MongoClient, ObjectId } = require("mongodb");
 
 const router = express.Router();
-
-router.get("/users", async (req, res) => {
-  try {
-    const db = await connectToDB();
-    const users = await db.collection("users").find().toArray();
-    res.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+const URI = process.env.MONGO_URL;
+const client = new MongoClient(URI);
 
 router.post("/users", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = { email, password: hashedPassword };
-
-    const db = await connectToDB();
-    const result = await db.collection("users").insertOne(newUser);
-    res.json(result.ops[0]);
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({ message: "Internal server error" });
+    await client.connect();
+    const data = await client
+      .db("ToDo")
+      .collection("users")
+      .insertOne({ ...req.body });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
-router.delete("/user/:id", async (req, res) => {
+router.get("/users", async (req, res) => {
   try {
-    const { id } = req.params;
-    const db = await connectToDB();
-    const result = await db.collection("users").deleteOne({ _id: new ObjectId(id) });
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.json({ message: "User deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).json({ message: "Internal server error" });
+    await client.connect();
+    const data = await client.db("ToDo").collection("users").find().toArray();
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
-
-router.get("/user/:id", async (req, res) => {
+router.put("/users/:id", async (req, res) => {
   try {
+    await client.connect();
     const { id } = req.params;
-    const db = await connectToDB();
-    const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.json(user);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    res.status(500).json({ message: "Internal server error" });
+    const updatedUser = { ...req.body };
+    const result = await client
+      .db("ToDo")
+      .collection("users")
+      .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+    await client.close();
+    return res.send(result);
+  } catch (err) {
+    return res.status(500).send({ err });
   }
 });
 
+router.get("/users/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const data = await client
+      .db("ToDo")
+      .collection("users")
+      .findOne({ _id: new ObjectId(req.params.id) });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
+  }
+});
+
+router.delete("/users/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const data = await client
+      .db("ToDo")
+      .collection("users")
+      .deleteOne({ _id: new ObjectId(req.params.id) });
+    await client.close();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send({ err });
+  }
+});
 
 module.exports = router;

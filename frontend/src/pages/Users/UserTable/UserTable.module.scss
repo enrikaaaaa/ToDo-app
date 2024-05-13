@@ -1,0 +1,28 @@
+.UserTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TableHeader,
+.TableData {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.TableHeader {
+  background-color: #f2f2f2;
+}
+
+.redIcon {
+  color: red;
+}
+.editIcon {
+  color: green;
+}
+
+@media (max-width: 768px) {
+  .UserTable {
+    overflow-x: auto;
+  }
+}

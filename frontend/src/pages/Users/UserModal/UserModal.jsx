@@ -1,6 +1,6 @@
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
-import UserForm from './UserForm';
+import UserForm from '../UserForm/UserForm';
 import styles from './UserModal.module.scss';
 
 const UserModal = ({ isModalOpen, handleCloseModal, handleSubmit }) => {
