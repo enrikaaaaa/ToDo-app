@@ -7,15 +7,16 @@ const URI = process.env.MONGO_URL;
 const client = new MongoClient(URI);
 
 router.post("/tasks", async (req, res) => {
+  let body = req.body;
+  body.Priority = new ObjectId(`${body.Priority}`);
+  body.AssignedTo = new ObjectId(`${body.AssignedTo}`);
   try {
     await client.connect();
-    const data = await client
-      .db("ToDo")
-      .collection("tasks")
-      .insertOne({ ...req.body });
+    const data = await client.db("ToDo").collection("tasks").insertOne(body);
     await client.close();
     return res.send(data);
   } catch (err) {
+    Í;
     return res.status(500).send({ err });
   }
 });

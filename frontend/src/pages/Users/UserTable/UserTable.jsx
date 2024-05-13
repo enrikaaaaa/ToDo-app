@@ -22,6 +22,7 @@ const UserTable = ({ users, handleDeleteUser }) => {
   const handleEditUser = (userId) => {
     const userToEdit = users.find((user) => user._id === userId);
     const editedUser = {
+      id: userToEdit._id,
       Name: userToEdit.Name || '',
       LastName: userToEdit.LastName || '',
       Password: userToEdit.Password || '',
@@ -48,11 +49,9 @@ const UserTable = ({ users, handleDeleteUser }) => {
   const handleSubmit = async () => {
     try {
       await updateUser(editedUser.id, editedUser);
-      console.log('User data updated successfully:', updateUser);
       setModalOpen(false);
     } catch (error) {
-      console.error('Error updating user data:', error);
-      alert('Failed to update user data. Please try again later.');
+      alert(error.message);
     }
   };
 

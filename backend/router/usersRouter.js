@@ -32,14 +32,15 @@ router.get("/users", async (req, res) => {
 });
 
 router.put("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log({ id });
   try {
     await client.connect();
     const { id } = req.params;
-    const updatedUser = { ...req.body };
     const result = await client
       .db("ToDo")
       .collection("users")
-      .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+      .updateOne({ _id: new ObjectId(id) }, { $set: req.body });
     await client.close();
     return res.send(result);
   } catch (err) {
