@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { verifyToken } = require("../middlewares/auth");
 
 const router = express.Router();
 const URI = process.env.MONGO_URL;
@@ -75,6 +75,8 @@ router.post("/login", async (req, res) => {
     const { _id } = user;
     const token = jwt.sign({ userId: _id }, "privateKey");
 
+    console.log(token);
+
     delete user.Password;
 
     await con.close();
@@ -84,7 +86,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/users", async (req, res) => {
+router.get("/users",  async (req, res) => {
   try {
     await client.connect();
     const data = await client.db("ToDo").collection("users").find().toArray();

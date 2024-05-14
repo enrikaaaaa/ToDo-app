@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const { MongoClient, ObjectId } = require("mongodb");
-
+const { verifyToken } = require("../middlewares/auth");
 const router = express.Router();
 const URI = process.env.MONGO_URL;
 const client = new MongoClient(URI);

@@ -6,6 +6,8 @@ const router = express.Router();
 const URI = process.env.MONGO_URL;
 const client = new MongoClient(URI);
 
+const { verifyToken } = require("../middlewares/auth");
+
 router.post("/tasks", async (req, res) => {
   let body = req.body;
   body.Priority = new ObjectId(`${body.Priority}`);

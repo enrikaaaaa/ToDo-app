@@ -3,7 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Button from '../../components/Button/Button';
 import { ROUTES } from '../../routes/consts';
 import TextField from '@mui/material/TextField';
-import bcrypt from 'bcryptjs';
 import { fetchUsers } from '../../api/users';
 import styles from './Login.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -18,18 +17,14 @@ const LoginForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
+      console.log('values', values);
       const users = await fetchUsers();
       const user = users.find((user) => user.Email === values.email);
 
+      console.log('users data', users);
+
       if (!user) {
         alert('User not found');
-        return;
-      }
-
-      const match = await bcrypt.compare(values.password, user.Password);
-
-      if (!match) {
-        alert('Invalid credentials');
         return;
       }
 
