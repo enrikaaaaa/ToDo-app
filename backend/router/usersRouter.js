@@ -32,7 +32,6 @@ router.post("/users", async (req, res) => {
     try {
       hashedPassword = await bcrypt.hash(newUser.Password, saltRounds);
     } catch (hashError) {
-      console.error("Error hashing password:", hashError);
       return res.status(500).send({ error: "Error hashing password" });
     }
 
@@ -44,11 +43,9 @@ router.post("/users", async (req, res) => {
       await con.close();
       return res.send(data);
     } catch (insertError) {
-      console.error("Error inserting user data:", insertError);
       return res.status(500).send({ error: "Error inserting user data" });
     }
   } catch (err) {
-    console.error("Server error:", err);
     return res.status(500).send({ error: "Server error" });
   }
 });
@@ -56,8 +53,6 @@ router.post("/users", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { Email, Password } = req.body;
-
-    console.log("Login request received for Email:", Email);
 
     if (!Email || !Password) {
       return res
@@ -67,15 +62,11 @@ router.post("/login", async (req, res) => {
     const con = await client.connect();
     const user = await con.db("ToDo").collection("users").findOne({ Email });
 
-    console.log("User found:", user);
-
     if (!user) {
       return res.status(400).send({ error: "User not found" });
     }
 
     const match = await bcrypt.compare(Password, user.Password);
-
-    console.log("Password match:", match);
 
     if (!match) {
       return res.status(400).send({ error: "Email or password is incorrect" });
@@ -89,7 +80,6 @@ router.post("/login", async (req, res) => {
     await con.close();
     return res.send({ token, user });
   } catch (err) {
-    console.error("Error during login:", err);
     return res.status(500).send({ error: "Internal server error" });
   }
 });
@@ -107,7 +97,6 @@ router.get("/users", async (req, res) => {
 
 router.put("/users/:id", async (req, res) => {
   const { id } = req.params;
-  console.log({ id });
   try {
     await client.connect();
     const { id } = req.params;

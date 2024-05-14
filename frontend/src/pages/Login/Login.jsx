@@ -37,7 +37,6 @@ const LoginForm = () => {
       navigate(ROUTES.TASKS);
       window.location.reload(ROUTES.TASKS);
     } catch (error) {
-      console.error('Error logging in:', error);
       alert('Error logging in. Please try again later.');
     }
     setSubmitting(false);

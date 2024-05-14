@@ -27,7 +27,6 @@ const UserForm = ({ handleSubmit }) => {
         password: values.Password,
       };
       await createUser(newUser);
-      console.log('Form Data Sent:', values);
       setSubmitting(false);
     } catch (error) {
       console.error('Error submitting form:', error);

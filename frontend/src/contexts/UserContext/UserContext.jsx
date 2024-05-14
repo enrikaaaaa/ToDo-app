@@ -12,6 +12,8 @@ const UserProvider = ({ children }) => {
   const handleLogin = (userData) => {
     setUser(userData);
     setIsLoggedIn(true);
+    localStorage.setItem('user', JSON.stringify(userData));
+    window.location.href = '/';
   };
 
   const handleLogOut = () => {
