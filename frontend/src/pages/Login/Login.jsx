@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Button from '../../components/Button/Button';
 import { ROUTES } from '../../routes/consts';
 import TextField from '@mui/material/TextField';
+import bcrypt from 'bcryptjs';
 import { fetchUsers } from '../../api/users';
 import styles from './Login.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -18,18 +19,26 @@ const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const users = await fetchUsers();
-      const user = users.find(
-        (user) =>
-          user.Email === values.email && user.Password === values.password,
-      );
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate(ROUTES.TASKS);
-      } else {
-        alert('User not found or invalid credentials');
+      const user = users.find((user) => user.Email === values.email);
+
+      if (!user) {
+        alert('User not found');
+        return;
       }
+
+      const match = await bcrypt.compare(values.password, user.Password);
+
+      if (!match) {
+        alert('Invalid credentials');
+        return;
+      }
+
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate(ROUTES.TASKS);
+      window.location.reload(ROUTES.TASKS);
     } catch (error) {
-      alert('Error logging in: ' + error);
+      console.error('Error logging in:', error);
+      alert('Error logging in. Please try again later.');
     }
     setSubmitting(false);
   };
@@ -66,7 +75,11 @@ const LoginForm = () => {
               component="div"
               className={styles.errorText}
             />
-            <Button type="submit" className={styles.loginButton}>
+            <Button
+              type="submit"
+              className={styles.loginButton}
+              onSubmit={handleSubmit}
+            >
               Log In
             </Button>
             <div className={styles.registerContainer}>

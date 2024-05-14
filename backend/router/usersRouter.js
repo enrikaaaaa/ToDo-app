@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 const { MongoClient, ObjectId } = require("mongodb");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 const URI = process.env.MONGO_URL;
@@ -8,15 +10,87 @@ const client = new MongoClient(URI);
 
 router.post("/users", async (req, res) => {
   try {
-    await client.connect();
-    const data = await client
+    const newUser = req.body;
+    const con = await client.connect();
+
+    if (!newUser.Email || !newUser.Password) {
+      return res
+        .status(400)
+        .send({ error: "Email and password are required fields!" });
+    }
+    const userAlreadyExists = await con
       .db("ToDo")
       .collection("users")
-      .insertOne({ ...req.body });
-    await client.close();
-    return res.send(data);
+      .findOne({ Email: newUser.Email });
+
+    if (userAlreadyExists) {
+      return res.status(400).send({ error: "User already exists" });
+    }
+
+    const saltRounds = 10;
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(newUser.Password, saltRounds);
+    } catch (hashError) {
+      console.error("Error hashing password:", hashError);
+      return res.status(500).send({ error: "Error hashing password" });
+    }
+
+    try {
+      const data = await con
+        .db("ToDo")
+        .collection("users")
+        .insertOne({ ...newUser, Password: hashedPassword });
+      await con.close();
+      return res.send(data);
+    } catch (insertError) {
+      console.error("Error inserting user data:", insertError);
+      return res.status(500).send({ error: "Error inserting user data" });
+    }
   } catch (err) {
-    return res.status(500).send({ err });
+    console.error("Server error:", err);
+    return res.status(500).send({ error: "Server error" });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const { Email, Password } = req.body;
+
+    console.log("Login request received for Email:", Email);
+
+    if (!Email || !Password) {
+      return res
+        .status(400)
+        .send({ error: "Email and password are required fields" });
+    }
+    const con = await client.connect();
+    const user = await con.db("ToDo").collection("users").findOne({ Email });
+
+    console.log("User found:", user);
+
+    if (!user) {
+      return res.status(400).send({ error: "User not found" });
+    }
+
+    const match = await bcrypt.compare(Password, user.Password);
+
+    console.log("Password match:", match);
+
+    if (!match) {
+      return res.status(400).send({ error: "Email or password is incorrect" });
+    }
+
+    const { _id } = user;
+    const token = jwt.sign({ userId: _id }, "privateKey");
+
+    delete user.Password;
+
+    await con.close();
+    return res.send({ token, user });
+  } catch (err) {
+    console.error("Error during login:", err);
+    return res.status(500).send({ error: "Internal server error" });
   }
 });
 

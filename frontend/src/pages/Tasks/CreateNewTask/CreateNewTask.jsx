@@ -4,6 +4,7 @@ import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import { createTask } from '../../../api/tasks';
 import { fetchPriority } from '../../../api/priority';
@@ -138,6 +139,7 @@ const CreateNewTask = ({ handleClose }) => {
               ))}
             </Select>
             <Button
+              startIcon={<AddIcon />}
               type="submit"
               variant="contained"
               color="primary"

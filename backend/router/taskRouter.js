@@ -32,7 +32,7 @@ router.get("/tasks", async (req, res) => {
         {
           $lookup: {
             from: "priority",
-            localField: "priority",
+            localField: "Priority",
             foreignField: "_id",
             as: "priorityData",
           },
@@ -43,7 +43,7 @@ router.get("/tasks", async (req, res) => {
         {
           $lookup: {
             from: "users",
-            localField: "assignedTo",
+            localField: "AssignedTo",
             foreignField: "_id",
             as: "userData",
           },

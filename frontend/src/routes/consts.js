@@ -6,7 +6,7 @@ import Tasks from '../pages/Tasks/Tasks';
 import Users from '../pages/Users/Users';
 
 export const ROUTES = {
-  LOGIN: '/',
+  LOGIN: '/login',
   REGISTER: '/register',
   USERS: '/users',
   TASKS: '/tasks/',

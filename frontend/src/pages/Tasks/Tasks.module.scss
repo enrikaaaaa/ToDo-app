@@ -12,6 +12,7 @@ $secondaryColor: #0c3b2e;
 .button {
   background-color: $secondaryColor;
   color: white;
+  margin: 10px;
 
   &:hover {
     background-color: lighten($secondaryColor, 10%);

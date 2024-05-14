@@ -21,7 +21,7 @@ const NavigationBar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('user');
-    window.location.href = '/';
+    window.location.href = '/login';
   };
 
   const handleMenuItemClick = () => {
@@ -50,7 +50,7 @@ const NavigationBar = () => {
           <div className={`container ${darkMode ? 'darkMode' : 'lightMode'}`}>
             <DarkModeToggleComponent />
           </div>
-          <div>Hello, {isLoggedIn && user.Name}!</div>
+          <div>Hello, {isLoggedIn ? user && user.Name : 'Guest'}!</div>
           <Button $info onClick={isLoggedIn ? handleLogOut : handleLogOut}>
             {isLoggedIn ? 'LogOut' : 'LogOut'}
           </Button>

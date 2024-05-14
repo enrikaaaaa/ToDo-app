@@ -15,6 +15,7 @@ import {
 } from '../../api/tasks';
 import { useEffect, useState } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
 import CreateNewTask from '../Tasks/CreateNewTask/CreateNewTask';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DoneIcon from '@mui/icons-material/Done';
@@ -138,10 +139,10 @@ const Tasks = () => {
                         {calculateDuration(task.StartDate, task.EndDate)}
                       </TableCell>
                       <TableCell c>
-                        <div>{getPriorityIcon(task.priority)}</div>
+                        <div>{getPriorityIcon(task.Priority)}</div>
                         <div>{task.priority}</div>
                       </TableCell>
-                      <TableCell>{task.assignedTo}</TableCell>
+                      <TableCell>{task.AssignedTo}</TableCell>
                       <TableCell>
                         {task.status === 'to_do' && (
                           <>
@@ -182,7 +183,11 @@ const Tasks = () => {
               ])}
             </TableBody>
           </Table>
-          <Button variant="contained" onClick={handleOpen}>
+          <Button
+            startIcon={<AddIcon />}
+            variant="contained"
+            onClick={handleOpen}
+          >
             Create New Task
           </Button>
           <Modal
