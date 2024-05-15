@@ -134,7 +134,9 @@ const Tasks = () => {
               {['to_do', 'in_progress', 'done'].map((status) => [
                 <TableRow key={status} className={styles.tableRow}>
                   <TableCell colSpan={9} className={styles.tableCell}>
-                    <h2 className={styles.leftText}>{status.toUpperCase().replace('_', ' ')}</h2>
+                    <h2 className={styles.leftText}>
+                      {status.toUpperCase().replace('_', ' ')}
+                    </h2>
                   </TableCell>
                 </TableRow>,
                 ...tasks
@@ -195,14 +197,14 @@ const Tasks = () => {
               ])}
             </TableBody>
           </Table>
-          <Button
+         <div> <Button
             startIcon={<AddIcon />}
             variant="contained"
             onClick={handleOpen}
-            className={styles.danger }
+            className={styles.customButton}
           >
             Create New Task
-          </Button>
+          </Button></div>
           <Modal
             open={open}
             onClose={handleClose}
@@ -210,7 +212,10 @@ const Tasks = () => {
             aria-describedby="modal-description"
           >
             <div>
-              <CreateNewTask handleClose={handleClose} handleResetUsers={handleResetUsers}/>
+              <CreateNewTask
+                handleClose={handleClose}
+                handleResetUsers={handleResetUsers}
+              />
             </div>
           </Modal>
         </TableContainer>

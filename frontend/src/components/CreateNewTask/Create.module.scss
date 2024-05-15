@@ -5,9 +5,13 @@ $greenColor: #008000;
   background-color: $brownColor !important; 
   color: white !important; 
   border-radius: 4px;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
+  width: 90vw;
+  max-width: 300px; 
 }
 
-.Button_root:hover {
-  background-color: darken($greenColor, 10%) !important; 
+@media (min-width: 768px) { 
+  .Button_root {
+    width: auto;
+  }
 }

@@ -10,6 +10,15 @@
   width: 400px;
   max-height: 90%;
   overflow: auto;
+  .submitButton{
+    background-color: #8B4513;
+    color: white;
+    margin: 10px;
+    &:hover {
+      background-color: lighten(#8B4513, 10%);
+    }
+  
+  }
 }
 
 .formContainer h2 {

@@ -35,7 +35,7 @@ const LoginForm = () => {
             <Field
               name="Email"
               as={TextField}
-              className={styles.fullWidthTextField}
+              className={`${styles.Field_root} `}
               label="Email"
               type="email"
               fullWidth
@@ -48,7 +48,7 @@ const LoginForm = () => {
             <Field
               name="Password"
               as={TextField}
-              className={styles.fullWidthTextField}
+              className={`${styles.Field_root} `}
               label="Password"
               type="password"
               fullWidth
@@ -60,7 +60,7 @@ const LoginForm = () => {
             />
             <Button
               type="submit"
-              className={styles.loginButton}
+              className={`${styles.Button_root} `}
               onSubmit={handleSubmit}
             >
               Log In

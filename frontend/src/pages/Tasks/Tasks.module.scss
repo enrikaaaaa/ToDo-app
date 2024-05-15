@@ -1,8 +1,58 @@
 $primaryColor: #6d7993;
 $secondaryColor: #0c3b2e;
+$brownColor: #8B4513; 
+
+.tasksContainer {
+  padding: 20px;
+  gap: 20px;
+
+  .redIcon {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+  .customButton {
+    background-color: #8B4513;
+    color: white;
+    margin: 10px;
+    &:hover {
+      background-color: lighten(#8B4513, 10%);
+    }
+  }
+
+  .TableRow {
+    .tableName {
+      background-color: lighten($secondaryColor, 25%);
+    }
+
+    background-color: rgba(178, 159, 127, 0.5);
+
+    &:hover {
+      background-color: rgba(178, 159, 127, 0.8);
+    }
+  }
+
+  .yellowIcon {
+    color: yellow;
+  }
+
+  .leftText {
+    text-align: left;
+  }
+
+  .center {
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 
 .container {
-  background-color: #6d7993;
+  background-color: $primaryColor;
 }
 
 .tableCell {
@@ -16,37 +66,5 @@ $secondaryColor: #0c3b2e;
 
   &:hover {
     background-color: lighten($secondaryColor, 10%);
-  }
-}
-.tasksContainer {
-  padding: 20px;
-}
-.redIcon {
-  color: red;
-}
-.green {
-  color: green;
-}
-.TableRow {
-  .tableName {
-    background-color: lighten($secondaryColor, 25%);
-  }
-  background-color: rgb(178, 159, 127, 0.5);
-
-  &:hover {
-    background-color: rgb(178, 159, 127, 0.8);
-  }
-}
-.yellowIcon {
-  color: yellow;
-}
-.leftText {
-  text-align: left;
-}
-.center {
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }

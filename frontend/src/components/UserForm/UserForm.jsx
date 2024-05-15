@@ -13,7 +13,9 @@ const UserForm = ({ handleSubmit }) => {
     Name: Yup.string().required('Name is required'),
     LastName: Yup.string().required('Last Name is required'),
     Password: Yup.string().required('Password is required'),
-    Email: Yup.string().email('Invalid email address').required('Email is required'),
+    Email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
     Role: Yup.string().required('Role is required'),
     Position: Yup.string().required('Position is required'),
   });
@@ -59,7 +61,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="Name" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="Name"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -69,7 +75,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="LastName" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="LastName"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -79,7 +89,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="Password" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="Password"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -89,7 +103,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="Email" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="Email"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -99,7 +117,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="Role" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="Role"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -109,7 +131,11 @@ const UserForm = ({ handleSubmit }) => {
               as={TextField}
               fullWidth
             />
-            <ErrorMessage name="Position" component="p" className={styles.errorMessage} />
+            <ErrorMessage
+              name="Position"
+              component="p"
+              className={styles.errorMessage}
+            />
           </div>
           <Button
             type="submit"
