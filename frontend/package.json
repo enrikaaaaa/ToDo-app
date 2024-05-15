@@ -28,6 +28,7 @@
     "react-dark-mode-toggle": "^0.2.0",
     "react-router-dom": "^6.23.0",
     "sass": "^1.76.0",
+    "scss": "^0.2.4",
     "stories": "^1.0.5",
     "styled-components": "^6.1.9",
     "yup": "^1.4.0"

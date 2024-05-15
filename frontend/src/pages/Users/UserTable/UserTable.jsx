@@ -1,4 +1,5 @@
 import { Table, TableBody } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 
 import PropTypes from 'prop-types';
 import UserEditModal from './UserEditModal';
@@ -22,6 +23,7 @@ const UserTable = ({ users, handleDeleteUser }) => {
   const handleEditUser = (userId) => {
     const userToEdit = users.find((user) => user._id === userId);
     const editedUser = {
+      id: userToEdit._id,
       Name: userToEdit.Name || '',
       LastName: userToEdit.LastName || '',
       Password: userToEdit.Password || '',
@@ -48,11 +50,9 @@ const UserTable = ({ users, handleDeleteUser }) => {
   const handleSubmit = async () => {
     try {
       await updateUser(editedUser.id, editedUser);
-      console.log('User data updated successfully:', updateUser);
       setModalOpen(false);
     } catch (error) {
-      console.error('Error updating user data:', error);
-      alert('Failed to update user data. Please try again later.');
+      alert(error.message);
     }
   };
 
@@ -60,6 +60,16 @@ const UserTable = ({ users, handleDeleteUser }) => {
     <div>
       <Table className={styles.UserTable}>
         <TableBody>
+        <TableRow className={styles.UserTableHeader}>
+            <TableCell className={styles.tableCell}>Name</TableCell>
+            <TableCell className={styles.tableCell}>L.Name</TableCell>
+            <TableCell className={styles.tableCell}>Password</TableCell>
+            <TableCell className={styles.tableCell}>Email</TableCell>
+            <TableCell className={styles.tableCell}>Role</TableCell>
+            <TableCell className={styles.tableCell}>Status</TableCell>
+            <TableCell className={styles.tableCell}>Actions</TableCell>
+          </TableRow>
+
           {users.map((user) => (
             <UserTableRow
               key={user._id}

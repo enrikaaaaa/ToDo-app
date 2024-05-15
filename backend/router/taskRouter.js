@@ -7,15 +7,16 @@ const URI = process.env.MONGO_URL;
 const client = new MongoClient(URI);
 
 router.post("/tasks", async (req, res) => {
+  let body = req.body;
+  body.Priority = new ObjectId(`${body.Priority}`);
+  body.AssignedTo = new ObjectId(`${body.AssignedTo}`);
   try {
     await client.connect();
-    const data = await client
-      .db("ToDo")
-      .collection("tasks")
-      .insertOne({ ...req.body });
+    const data = await client.db("ToDo").collection("tasks").insertOne(body);
     await client.close();
     return res.send(data);
   } catch (err) {
+    Í;
     return res.status(500).send({ err });
   }
 });
@@ -23,7 +24,6 @@ router.post("/tasks", async (req, res) => {
 router.get("/tasks", async (req, res) => {
   try {
     await client.connect();
-
     const data = await client
       .db("ToDo")
       .collection("tasks")
@@ -31,7 +31,7 @@ router.get("/tasks", async (req, res) => {
         {
           $lookup: {
             from: "priority",
-            localField: "priority",
+            localField: "Priority",
             foreignField: "_id",
             as: "priorityData",
           },
@@ -42,7 +42,7 @@ router.get("/tasks", async (req, res) => {
         {
           $lookup: {
             from: "users",
-            localField: "assignedTo",
+            localField: "AssignedTo",
             foreignField: "_id",
             as: "userData",
           },
@@ -59,12 +59,7 @@ router.get("/tasks", async (req, res) => {
             EndDate: 1,
             status: 1,
             priority: "$priorityData.Name",
-            assignedTo: {
-              $concat: [
-                { $substr: ["$userData.Name", 0, 1] },
-                { $substr: ["$userData.LastName", 0, 1] },
-              ],
-            },
+            assignedTo: "$userData.Name",
           },
         },
       ])

@@ -1,0 +1,32 @@
+.formContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 400px;
+  max-height: 90%;
+  overflow: auto;
+}
+
+.formContainer h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputField {
+  margin-bottom: 15px;
+}
+
+.submitButton {
+  margin: 20px;
+}

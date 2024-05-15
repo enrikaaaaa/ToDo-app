@@ -8,6 +8,10 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+
+  &:hover {
+    background-color: rgb(178, 159, 127, 0.8);
+  }
 }
 
 .TableHeader {
@@ -19,6 +23,15 @@
 }
 .editIcon {
   color: green;
+}
+.tableCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(178, 159, 127, 0.5);
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

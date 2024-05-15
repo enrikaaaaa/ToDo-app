@@ -12,6 +12,7 @@ $secondaryColor: #0c3b2e;
 .button {
   background-color: $secondaryColor;
   color: white;
+  margin: 10px;
 
   &:hover {
     background-color: lighten($secondaryColor, 10%);
@@ -27,8 +28,23 @@ $secondaryColor: #0c3b2e;
   color: green;
 }
 .TableRow {
+  .tableName{
+    background-color: lighten($secondaryColor, 25%);
+  
+  }
   background-color: rgb(178, 159, 127, 0.5);
+
+  &:hover {
+    background-color: rgb(178, 159, 127, 0.8);
+  }
 }
 .yellowIcon {
   color: yellow;
+}
+.center {
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

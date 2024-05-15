@@ -4,10 +4,11 @@ import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
-import { createTask } from '../../api/tasks';
-import { fetchPriority } from '../../api/priority';
-import { fetchUsers } from '../../api/users';
+import { createTask } from '../../../api/tasks';
+import { fetchPriority } from '../../../api/priority';
+import { fetchUsers } from '../../../api/users';
 import styles from './CreateNewTask.module.scss';
 
 const CreateNewTask = ({ handleClose }) => {
@@ -38,11 +39,12 @@ const CreateNewTask = ({ handleClose }) => {
     AssignedTo: Yup.string().required('Assigned To is required'),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       values.status = 'to_do';
       await createTask(values);
       handleClose();
+      resetForm();
     } catch (error) {
       console.error('Error creating task:', error);
     }
@@ -138,6 +140,7 @@ const CreateNewTask = ({ handleClose }) => {
               ))}
             </Select>
             <Button
+              startIcon={<AddIcon />}
               type="submit"
               variant="contained"
               color="primary"

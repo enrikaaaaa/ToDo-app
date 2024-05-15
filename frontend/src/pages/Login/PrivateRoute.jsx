@@ -1,16 +1,12 @@
-import PropTypes from "prop-types";
-import { Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Navigate, Route } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  const navigate = useNavigate();
-
   return (
     <Route
       {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : navigate("/")
-      }
+      element={isAuthenticated ? <Component /> : <Navigate to="/login" />}
     />
   );
 };

@@ -16,3 +16,6 @@ export const updateUser = (userId, updatedData) =>
   axios
     .put(`${API}/users/${userId}`, updatedData)
     .then((response) => response.data);
+
+export const loginUser = (loginData) =>
+  axios.post(`${API}/login`, loginData).then((response) => response.data);

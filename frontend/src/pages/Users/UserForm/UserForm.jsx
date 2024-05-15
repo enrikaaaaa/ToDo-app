@@ -13,9 +13,7 @@ const UserForm = ({ handleSubmit }) => {
     Name: Yup.string().required('Name is required'),
     LastName: Yup.string().required('Last Name is required'),
     Password: Yup.string().required('Password is required'),
-    Email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+    Email: Yup.string().email('Invalid email address').required('Email is required'),
     Role: Yup.string().required('Role is required'),
     Position: Yup.string().required('Position is required'),
   });
@@ -25,9 +23,12 @@ const UserForm = ({ handleSubmit }) => {
       const newUser = {
         email: values.Email,
         password: values.Password,
+        name: values.Name,
+        lastName: values.LastName,
+        role: values.Role,
+        position: values.Position,
       };
       await createUser(newUser);
-      console.log('Form Data Sent:', values);
       setSubmitting(false);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -49,14 +50,16 @@ const UserForm = ({ handleSubmit }) => {
       onSubmit={handleSubmit || submitForm}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form className={styles.form}>
           <div className={styles.inputContainer}>
-            <Field type="text" name="Name" placeholder="Name" as={TextField} />
-            <ErrorMessage
+            <Field
+              type="text"
               name="Name"
-              component="p"
-              className={styles.errorMessage}
+              placeholder="Name"
+              as={TextField}
+              fullWidth
             />
+            <ErrorMessage name="Name" component="p" className={styles.errorMessage} />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -64,12 +67,9 @@ const UserForm = ({ handleSubmit }) => {
               name="LastName"
               placeholder="Last Name"
               as={TextField}
+              fullWidth
             />
-            <ErrorMessage
-              name="LastName"
-              component="p"
-              className={styles.errorMessage}
-            />
+            <ErrorMessage name="LastName" component="p" className={styles.errorMessage} />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -77,12 +77,9 @@ const UserForm = ({ handleSubmit }) => {
               name="Password"
               placeholder="Password"
               as={TextField}
+              fullWidth
             />
-            <ErrorMessage
-              name="Password"
-              component="p"
-              className={styles.errorMessage}
-            />
+            <ErrorMessage name="Password" component="p" className={styles.errorMessage} />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -90,20 +87,19 @@ const UserForm = ({ handleSubmit }) => {
               name="Email"
               placeholder="Email"
               as={TextField}
+              fullWidth
             />
-            <ErrorMessage
-              name="Email"
-              component="p"
-              className={styles.errorMessage}
-            />
+            <ErrorMessage name="Email" component="p" className={styles.errorMessage} />
           </div>
           <div className={styles.inputContainer}>
-            <Field type="text" name="Role" placeholder="Role" as={TextField} />
-            <ErrorMessage
+            <Field
+              type="text"
               name="Role"
-              component="p"
-              className={styles.errorMessage}
+              placeholder="Role"
+              as={TextField}
+              fullWidth
             />
+            <ErrorMessage name="Role" component="p" className={styles.errorMessage} />
           </div>
           <div className={styles.inputContainer}>
             <Field
@@ -111,12 +107,9 @@ const UserForm = ({ handleSubmit }) => {
               name="Position"
               placeholder="Position"
               as={TextField}
+              fullWidth
             />
-            <ErrorMessage
-              name="Position"
-              component="p"
-              className={styles.errorMessage}
-            />
+            <ErrorMessage name="Position" component="p" className={styles.errorMessage} />
           </div>
           <Button
             type="submit"
