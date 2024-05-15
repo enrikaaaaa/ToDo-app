@@ -1,3 +1,17 @@
+$brownColor: #8b4513;
+$greenColor: #008000;
+
+.Button_root {
+  background-color: $brownColor !important;
+  color: white !important;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.Button_root:hover {
+  background-color: darken($greenColor, 10%) !important;
+}
+
 .containerLogin {
   width: 100%;
   min-height: 100vh;
@@ -31,11 +45,6 @@
   display: block;
   margin-bottom: 40px;
   font-family: 'Pacifico', cursive;
-}
-
-.fullWidthTextField {
-  width: calc(100% - 2rem);
-  margin-bottom: 2rem;
 }
 
 .errorText {

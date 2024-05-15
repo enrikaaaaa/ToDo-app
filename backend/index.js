@@ -4,6 +4,7 @@ const userRoutes = require("../backend/router/usersRouter");
 const tasksRoutes = require("../backend/router/taskRouter");
 const { verifyToken } = require("../backend/middlewares/auth");
 const auth = require("../backend/router/authRouter");
+const priority = require("../backend/router/priorityRouter");
 
 const app = express();
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 8081;
 
 app.use(userRoutes, verifyToken);
 app.use(tasksRoutes, verifyToken);
+app.use(priority, verifyToken);
 app.use(auth);
 
 app.listen(PORT, () => {
