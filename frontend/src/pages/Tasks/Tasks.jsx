@@ -100,6 +100,15 @@ const Tasks = () => {
     setOpen(false);
   };
 
+  const handleResetUsers = async () => {
+    try {
+      const updatedTasks = await fetchTasks();
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error('Error resetting users table:', error);
+    }
+  };
+
   return (
     <div className={styles.tasksContainer}>
       <h1 className={styles.title}>Tasks</h1>
@@ -144,7 +153,7 @@ const Tasks = () => {
                         <div>{task.priority}</div>
                       </TableCell>
                       <TableCell className={styles.center}>
-                       <div> {task.assignedTo}</div>
+                        <div> {task.assignedTo}</div>
                       </TableCell>
                       <TableCell>
                         {task.status === 'to_do' && (
@@ -200,9 +209,7 @@ const Tasks = () => {
             aria-describedby="modal-description"
           >
             <div>
-              <CreateNewTask handleClose={handleClose} >
-                
-              </CreateNewTask>
+              <CreateNewTask handleClose={handleClose} handleResetUsers={handleResetUsers}/>
             </div>
           </Modal>
         </TableContainer>

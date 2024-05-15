@@ -73,7 +73,7 @@ router.post("/users", async (req, res) => {
       }
   
       const { _id } = user;
-      const token = jwt.sign({ userId: _id }, "privateKey");
+      const token = jwt.sign({ userId: _id }, process.env.JSON_WEB_TOKEN);
   
       await con.close();
       delete user.Password;
