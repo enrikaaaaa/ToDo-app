@@ -11,7 +11,7 @@ import { fetchPriority } from '../../../api/priority';
 import { fetchUsers } from '../../../api/users';
 import styles from './CreateNewTask.module.scss';
 
-const CreateNewTask = ({ handleClose }) => {
+const CreateNewTask = ({ handleClose, handleResetUsers }) => {
   const [priorityOptions, setPriorityOptions] = useState([]);
   const [assignedToOptions, setAssignedToOptions] = useState([]);
 
@@ -44,6 +44,7 @@ const CreateNewTask = ({ handleClose }) => {
       values.status = 'to_do';
       await createTask(values);
       handleClose();
+      handleResetUsers();
       resetForm();
     } catch (error) {
       console.error('Error creating task:', error);
@@ -157,6 +158,7 @@ const CreateNewTask = ({ handleClose }) => {
 
 CreateNewTask.propTypes = {
   handleClose: PropTypes.func.isRequired,
+  handleResetUsers: PropTypes.func.isRequired,
 };
 
 export default CreateNewTask;

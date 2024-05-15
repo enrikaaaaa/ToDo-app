@@ -2,7 +2,6 @@ import AuthLayout from '../layouts/AuthLayout';
 import BasicLayout from '../layouts/BasicLayout';
 import ChartPie from '../pages/ChartPie/ChartPie';
 import Login from '../pages/Login/Login';
-import PrivateRoute from '../pages/Login/PrivateRoute';
 import Tasks from '../pages/Tasks/Tasks';
 import Users from '../pages/Users/Users';
 
@@ -19,39 +18,39 @@ export const routes = [
     path: ROUTES.LOGIN,
     Component: Login,
     Layout: AuthLayout,
+    isPrivate: false,
   },
-
   {
     path: ROUTES.USERS,
     Component: Users,
     Layout: BasicLayout,
-    Route: PrivateRoute,
+    isPrivate: true,
   },
   {
     path: ROUTES.TASKS,
     Component: Tasks,
     Layout: BasicLayout,
-    Route: PrivateRoute,
+    isPrivate: true,
   },
   {
     path: ROUTES.PIE,
     Component: ChartPie,
     Layout: BasicLayout,
-    Route: PrivateRoute,
+    isPrivate: true,
   },
 ];
 
 export const navigationBarLinks = [
   {
-    title: 'Users',
+    name: 'Users',
     path: ROUTES.USERS,
   },
   {
-    title: 'Tasks',
+    name: 'Tasks',
     path: ROUTES.TASKS,
   },
   {
-    title: 'Pie',
+    name: 'Chart',
     path: ROUTES.PIE,
   },
 ];
