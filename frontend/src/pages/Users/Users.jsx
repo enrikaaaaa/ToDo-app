@@ -5,8 +5,8 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import TableContainer from '@mui/material/TableContainer';
-import UserModal from './UserModal/UserModal';
-import UserTable from './UserTable/UserTable';
+import UserModal from '../../components/UserModal/UserModal';
+import UserTable from '../../components/UserTable/UserTable';
 import styles from './Users.module.scss';
 
 const Users = () => {
@@ -62,9 +62,7 @@ const Users = () => {
       ) : (
         <TableContainer>
           <UserTable users={users} handleDeleteUser={handleDeleteUser} />
-        </TableContainer>
-      )}
-      <Button
+          <Button
         variant="contained"
         startIcon={<PersonAddIcon />}
         onClick={handleOpenModal}
@@ -72,6 +70,10 @@ const Users = () => {
       >
         Add User
       </Button>
+        </TableContainer>
+        
+      )}
+     
       <UserModal
         isModalOpen={isModalOpen}
         handleCloseModal={handleCloseModal}

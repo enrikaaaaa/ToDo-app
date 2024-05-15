@@ -16,7 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import CreateNewTask from '../Tasks/CreateNewTask/CreateNewTask';
+import CreateNewTask from './CreateNewTask/CreateNewTask';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DoneIcon from '@mui/icons-material/Done';
 import { Modal } from '@mui/material';
@@ -134,7 +134,7 @@ const Tasks = () => {
               {['to_do', 'in_progress', 'done'].map((status) => [
                 <TableRow key={status} className={styles.tableRow}>
                   <TableCell colSpan={9} className={styles.tableCell}>
-                    <h2>{status.toUpperCase().replace('_', ' ')}</h2>
+                    <h2 className={styles.leftText}>{status.toUpperCase().replace('_', ' ')}</h2>
                   </TableCell>
                 </TableRow>,
                 ...tasks
@@ -199,6 +199,7 @@ const Tasks = () => {
             startIcon={<AddIcon />}
             variant="contained"
             onClick={handleOpen}
+            className={styles.danger }
           >
             Create New Task
           </Button>
