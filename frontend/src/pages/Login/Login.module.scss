@@ -6,6 +6,7 @@ $greenColor: #008000;
   color: white !important;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  justify-content: right;
 }
 
 .Button_root:hover {
@@ -24,6 +25,9 @@ $greenColor: #008000;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  .Field_root {
+    margin-bottom: 20px;
+  }
 }
 
 .formContainer {

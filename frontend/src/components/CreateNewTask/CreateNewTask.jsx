@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { createTask } from '../../../api/tasks';
 import { fetchPriority } from '../../../api/priority';
 import { fetchUsers } from '../../../api/users';
-import styles from '../CreateNewTask/Create.module.scss'
+import styles from '../CreateNewTask/CreateNewTask.module.css';
 
 const CreateNewTask = ({ handleClose, handleResetUsers }) => {
   const [priorityOptions, setPriorityOptions] = useState([]);
