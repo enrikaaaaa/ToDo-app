@@ -17,11 +17,8 @@ const LoginForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      console.log('values', values);
       const users = await fetchUsers();
       const user = users.find((user) => user.Email === values.email);
-
-      console.log('users data', users);
 
       if (!user) {
         alert('User not found');
@@ -29,11 +26,25 @@ const LoginForm = () => {
       }
 
       localStorage.setItem('user', JSON.stringify(user));
+
       navigate(ROUTES.TASKS);
-      window.location.reload(ROUTES.TASKS);
+
+      const waitForTasksPage = new Promise((resolve) => {
+        const intervalId = setInterval(() => {
+          const tasksPageElement = document.querySelector('.tasks-page');
+          if (tasksPageElement) {
+            clearInterval(intervalId);
+            resolve();
+          }
+        }, 100);
+      });
+
+      await waitForTasksPage;
+      window.location.reload();
     } catch (error) {
       alert('Error logging in. Please try again later.');
     }
+
     setSubmitting(false);
   };
 

@@ -19,7 +19,6 @@
     "@mui/x-charts": "^7.4.0",
     "aws-sdk": "^2.1618.0",
     "axios": "^1.6.8",
-    "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "formik-material-ui": "^4.0.0-alpha.2",
