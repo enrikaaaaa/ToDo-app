@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-import Button from '../../components/Button/Button';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { UserContext } from '../../contexts/UserContext';
 import { loginUser } from '../../api/users';

@@ -28,9 +28,8 @@ $secondaryColor: #0c3b2e;
   color: green;
 }
 .TableRow {
-  .tableName{
+  .tableName {
     background-color: lighten($secondaryColor, 25%);
-  
   }
   background-color: rgb(178, 159, 127, 0.5);
 
@@ -40,6 +39,9 @@ $secondaryColor: #0c3b2e;
 }
 .yellowIcon {
   color: yellow;
+}
+.leftText {
+  text-align: left;
 }
 .center {
   div {

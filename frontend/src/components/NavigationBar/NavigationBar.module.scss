@@ -1,10 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
+
+$brownColor: #8B4513; 
+$greenColor: #008000; 
+
+.Button_root {
+  background-color: $brownColor !important; 
+  color: white !important; 
+  border-radius: 4px;
+  transition: background-color 0.3s ease; 
+}
+
+.Button_root:hover {
+  background-color: darken($greenColor, 10%) !important; 
+}
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 3px solid black;
   background-color: #ae9173;
+  height: 60px;
+  padding: 10px 20px;
 }
 
 .menuIcon {
@@ -74,13 +90,7 @@
     background-color: #333;
     margin: 5px;
   }
-  .buttonLogOut {
-    border-radius: 5rem;
-    justify-self: right;
-  }
-  .buttonLogOut::after {
-    content: 'Bye';
-  }
+
   .logo img {
     display: none;
   }

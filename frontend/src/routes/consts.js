@@ -18,25 +18,21 @@ export const routes = [
     path: ROUTES.LOGIN,
     Component: Login,
     Layout: AuthLayout,
-    isPrivate: false,
   },
   {
     path: ROUTES.USERS,
     Component: Users,
     Layout: BasicLayout,
-    isPrivate: true,
   },
   {
     path: ROUTES.TASKS,
     Component: Tasks,
     Layout: BasicLayout,
-    isPrivate: true,
   },
   {
     path: ROUTES.PIE,
     Component: ChartPie,
     Layout: BasicLayout,
-    isPrivate: true,
   },
 ];
 
