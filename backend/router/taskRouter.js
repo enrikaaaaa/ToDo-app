@@ -6,8 +6,6 @@ const router = express.Router();
 const URI = process.env.MONGO_URL;
 const client = new MongoClient(URI);
 
-const { verifyToken } = require("../middlewares/auth");
-
 router.post("/tasks", async (req, res) => {
   let body = req.body;
   body.Priority = new ObjectId(`${body.Priority}`);
@@ -26,7 +24,6 @@ router.post("/tasks", async (req, res) => {
 router.get("/tasks", async (req, res) => {
   try {
     await client.connect();
-
     const data = await client
       .db("ToDo")
       .collection("tasks")
@@ -62,12 +59,7 @@ router.get("/tasks", async (req, res) => {
             EndDate: 1,
             status: 1,
             priority: "$priorityData.Name",
-            assignedTo: {
-              $concat: [
-                { $substr: ["$userData.Name", 0, 1] },
-                { $substr: ["$userData.LastName", 0, 1] },
-              ],
-            },
+            assignedTo: "$userData.Name",
           },
         },
       ])

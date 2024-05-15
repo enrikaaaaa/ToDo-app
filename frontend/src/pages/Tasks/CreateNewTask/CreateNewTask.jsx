@@ -39,11 +39,12 @@ const CreateNewTask = ({ handleClose }) => {
     AssignedTo: Yup.string().required('Assigned To is required'),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       values.status = 'to_do';
       await createTask(values);
       handleClose();
+      resetForm();
     } catch (error) {
       console.error('Error creating task:', error);
     }

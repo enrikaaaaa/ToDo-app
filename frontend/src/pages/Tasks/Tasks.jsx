@@ -103,6 +103,7 @@ const Tasks = () => {
   return (
     <div className={styles.tasksContainer}>
       <h1 className={styles.title}>Tasks</h1>
+
       {isLoading ? (
         <CircularProgress />
       ) : (
@@ -110,14 +111,14 @@ const Tasks = () => {
           <Table>
             <TableHead>
               <TableRow className={styles.TableRow}>
-                <TableCell className={styles.tableCell}>Title</TableCell>
-                <TableCell className={styles.tableCell}>Description</TableCell>
-                <TableCell className={styles.tableCell}>Start Date</TableCell>
-                <TableCell className={styles.tableCell}>End Date</TableCell>
-                <TableCell className={styles.tableCell}>Duration</TableCell>
-                <TableCell className={styles.tableCell}>Priority</TableCell>
-                <TableCell className={styles.tableCell}>Assigned To</TableCell>
-                <TableCell className={styles.tableCell}>Actions</TableCell>
+                <TableCell className={styles.tableName}>Title</TableCell>
+                <TableCell className={styles.tableName}>Description</TableCell>
+                <TableCell className={styles.tableName}>Start Date</TableCell>
+                <TableCell className={styles.tableName}>End Date</TableCell>
+                <TableCell className={styles.tableName}>Duration</TableCell>
+                <TableCell className={styles.tableName}>Priority</TableCell>
+                <TableCell className={styles.tableName}>Assigned To</TableCell>
+                <TableCell className={styles.tableName}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -138,11 +139,13 @@ const Tasks = () => {
                       <TableCell>
                         {calculateDuration(task.StartDate, task.EndDate)}
                       </TableCell>
-                      <TableCell c>
-                        <div>{getPriorityIcon(task.Priority)}</div>
+                      <TableCell className={styles.center}>
+                        <div>{getPriorityIcon(task.priority)}</div>
                         <div>{task.priority}</div>
                       </TableCell>
-                      <TableCell>{task.AssignedTo}</TableCell>
+                      <TableCell className={styles.center}>
+                       <div> {task.assignedTo}</div>
+                      </TableCell>
                       <TableCell>
                         {task.status === 'to_do' && (
                           <>
@@ -197,7 +200,9 @@ const Tasks = () => {
             aria-describedby="modal-description"
           >
             <div>
-              <CreateNewTask handleClose={handleClose} />
+              <CreateNewTask handleClose={handleClose} >
+                
+              </CreateNewTask>
             </div>
           </Modal>
         </TableContainer>

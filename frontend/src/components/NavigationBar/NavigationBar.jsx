@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 
 import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext/UserContext';
+import { UserContext } from '../../contexts/UserContext';
 import { navigationBarLinks } from '../../routes/consts';
 import styles from './NavigationBar.module.scss';
 
@@ -38,7 +38,7 @@ const NavigationBar = () => {
           className={showMenu ? `${styles.menu} ${styles.show}` : styles.menu}
         >
           {navigationBarLinks.map((link) => (
-            <li key={link.path} onClick={handleMenuItemClick}>
+            <li key={link.path}  onClick={handleMenuItemClick}>
               <Link to={link.path}>{link.title}</Link>
             </li>
           ))}
@@ -47,7 +47,7 @@ const NavigationBar = () => {
         <div className={styles.hello}>
          
            
-          </div>
+         
           <div>Hello, {isLoggedIn ? user && user.Name : 'Guest'}!</div>
           <Button
             className={styles.info}
@@ -55,7 +55,7 @@ const NavigationBar = () => {
           >
             {isLoggedIn ? 'LogOut' : 'LogOut'}
           </Button>
-    
+          </div>
       </nav>
     </header>
   );

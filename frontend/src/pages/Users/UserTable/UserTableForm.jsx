@@ -11,7 +11,6 @@ const UserTableForm = ({ editedUser, handleChange }) => {
         onChange={handleChange}
         fullWidth
       />
-
       <TextField
         label="Last Name"
         name="LastName"

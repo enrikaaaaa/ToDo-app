@@ -1,46 +1,24 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import Button from '../../components/Button/Button';
-import { ROUTES } from '../../routes/consts';
 import TextField from '@mui/material/TextField';
-import { fetchUsers } from '../../api/users';
+import { UserContext } from '../../contexts/UserContext';
+import { loginUser } from '../../api/users';
 import styles from './Login.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const { handleLogin } = useContext(UserContext);
 
   const initialValues = {
-    email: '',
-    password: '',
+    Email: '',
+    Password: '',
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const users = await fetchUsers();
-      const user = users.find((user) => user.Email === values.email);
-
-      if (!user) {
-        alert('User not found');
-        return;
-      }
-
-      localStorage.setItem('user', JSON.stringify(user));
-
-      navigate(ROUTES.TASKS);
-
-      const waitForTasksPage = new Promise((resolve) => {
-        const intervalId = setInterval(() => {
-          const tasksPageElement = document.querySelector('.tasks-page');
-          if (tasksPageElement) {
-            clearInterval(intervalId);
-            resolve();
-          }
-        }, 100);
-      });
-
-      await waitForTasksPage;
-      window.location.reload();
+      const response = await loginUser(values);
+      handleLogin(response);
     } catch (error) {
       alert('Error logging in. Please try again later.');
     }
@@ -55,7 +33,7 @@ const LoginForm = () => {
           <Form>
             <h2 className={styles.formTitle}>Login</h2>
             <Field
-              name="email"
+              name="Email"
               as={TextField}
               className={styles.fullWidthTextField}
               label="Email"
@@ -63,12 +41,12 @@ const LoginForm = () => {
               fullWidth
             />
             <ErrorMessage
-              name="email"
+              name="Email"
               component="div"
               className={styles.errorText}
             />
             <Field
-              name="password"
+              name="Password"
               as={TextField}
               className={styles.fullWidthTextField}
               label="Password"
@@ -76,7 +54,7 @@ const LoginForm = () => {
               fullWidth
             />
             <ErrorMessage
-              name="password"
+              name="Password"
               component="div"
               className={styles.errorText}
             />

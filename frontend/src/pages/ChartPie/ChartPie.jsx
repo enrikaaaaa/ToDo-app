@@ -54,18 +54,20 @@ const ChartPie = () => {
   return (
     <div className={styles.chartContainer}>
       <h1>Pie Chart</h1>
+      <h2>Here you can see how your team works</h2>
+
       {isLoading ? (
         <CircularProgress />
       ) : (
         <PieChart
-          series={[
-            {
-              arcLabel: (item) => `${item.label} (${item.value})`,
-              arcLabelMinAngle: 45,
-              data,
-              arcLabelPosition: 'outside',
-            },
-          ]}
+        series={[
+          {
+            data,
+            highlightScope: { faded: 'global', highlighted: 'item' },
+            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+          },
+        ]}
+        height={200}
           sx={{
             [`& .${pieArcLabelClasses.root}`]: {
               fill: 'white',

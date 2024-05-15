@@ -4,12 +4,48 @@ $color-done: #e0e0e0;
 .chartContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 600px;
   gap: 50px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding-top: 5rem;
 }
 
 .pieChart {
   width: 300px;
 }
+
+.legend {
+  display: none;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+h2 {
+  text-align: center;
+  padding: 10px;
+}
+// @media screen and (max-width: 768px) {
+//   .chartContainer {
+//     gap: 50px;
+//     padding-top: 0;
+//     width: 100px;
+//   }
+//   .pieChart {
+//     width: 300px;
+//   }
+//   .legend {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+//   }
+//   .legendItem {
+//     display: flex;
+//     align-items: center;
+//     margin-bottom: 5px;
+//   }
+// }

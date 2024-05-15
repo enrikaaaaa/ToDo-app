@@ -1,4 +1,5 @@
 import { Table, TableBody } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 
 import PropTypes from 'prop-types';
 import UserEditModal from './UserEditModal';
@@ -59,6 +60,16 @@ const UserTable = ({ users, handleDeleteUser }) => {
     <div>
       <Table className={styles.UserTable}>
         <TableBody>
+        <TableRow className={styles.UserTableHeader}>
+            <TableCell className={styles.tableCell}>Name</TableCell>
+            <TableCell className={styles.tableCell}>L.Name</TableCell>
+            <TableCell className={styles.tableCell}>Password</TableCell>
+            <TableCell className={styles.tableCell}>Email</TableCell>
+            <TableCell className={styles.tableCell}>Role</TableCell>
+            <TableCell className={styles.tableCell}>Status</TableCell>
+            <TableCell className={styles.tableCell}>Actions</TableCell>
+          </TableRow>
+
           {users.map((user) => (
             <UserTableRow
               key={user._id}
