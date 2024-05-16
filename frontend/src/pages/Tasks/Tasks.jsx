@@ -16,7 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import CreateNewTask from './CreateNewTask/CreateNewTask';
+import CreateNewTask from '../../components/CreateNewTask/CreateNewTask';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DoneIcon from '@mui/icons-material/Done';
 import { Modal } from '@mui/material';
@@ -197,14 +197,17 @@ const Tasks = () => {
               ])}
             </TableBody>
           </Table>
-         <div> <Button
-            startIcon={<AddIcon />}
-            variant="contained"
-            onClick={handleOpen}
-            className={styles.customButton}
-          >
-            Create New Task
-          </Button></div>
+          <div>
+            {' '}
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              onClick={handleOpen}
+              className={styles.customButton}
+            >
+              Create New Task
+            </Button>
+          </div>
           <Modal
             open={open}
             onClose={handleClose}

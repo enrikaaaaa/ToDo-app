@@ -14,8 +14,6 @@ const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInInitial);
   const navigate = useNavigate();
 
-  const authenticated = !!user;
-
   const handleLogin = (loginData) => {
     setUser(loginData.user);
     setIsLoggedIn(true);
@@ -28,8 +26,8 @@ const UserProvider = ({ children }) => {
     setUser(null);
     setIsLoggedIn(false);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
   };
+  const authenticated = !!user;
 
   return (
     <UserContext.Provider
