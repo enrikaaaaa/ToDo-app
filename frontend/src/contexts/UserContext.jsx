@@ -4,13 +4,17 @@ import PropTypes from 'prop-types';
 import { ROUTES } from '../routes/consts';
 import { useNavigate } from 'react-router-dom';
 
-const UserContext = createContext();
+const UserContext = createContext({
+  authenticated: false,
+});
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const isLoggedInInitial = !!localStorage.getItem('user');
   const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInInitial);
   const navigate = useNavigate();
+
+  const authenticated = !!user;
 
   const handleLogin = (loginData) => {
     setUser(loginData.user);
@@ -29,7 +33,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, isLoggedIn, handleLogin, handleLogOut }}
+      value={{ user, isLoggedIn, handleLogin, handleLogOut, authenticated }}
     >
       {children}
     </UserContext.Provider>

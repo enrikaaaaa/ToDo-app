@@ -23,6 +23,7 @@ const NavigationBar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     navigate(ROUTES.LOGIN);
   };
 
