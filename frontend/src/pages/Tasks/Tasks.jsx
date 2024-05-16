@@ -77,14 +77,14 @@ const Tasks = () => {
     return Math.round(durationInDays);
   };
 
-   const getPriorityIcon = (priority) => {
+  const getPriorityIcon = (priority) => {
     const priorityIcons = {
       important: <PriorityHighIcon className={styles.redIcon} />,
       high: <NotificationImportantIcon className={styles.redIcon} />,
       medium: <StarRateIcon className={styles.yellowIcon} />,
       low: <WarningAmberIcon className={styles.green} />,
     };
-  
+
     return priorityIcons[priority] || null;
   };
 
@@ -194,7 +194,6 @@ const Tasks = () => {
             </TableBody>
           </Table>
           <div>
-            {' '}
             <Button
               startIcon={<AddIcon />}
               variant="contained"
