@@ -78,18 +78,14 @@ const Tasks = () => {
   };
 
   const getPriorityIcon = (priority) => {
-    switch (priority) {
-      case 'important':
-        return <PriorityHighIcon className={styles.redIcon} />;
-      case 'high':
-        return <NotificationImportantIcon className={styles.redIcon} />;
-      case 'medium':
-        return <StarRateIcon className={styles.yellowIcon} />;
-      case 'low':
-        return <WarningAmberIcon className={styles.green} />;
-      default:
-        return null;
-    }
+    const priorityIcons = {
+      important: <PriorityHighIcon className={styles.redIcon} />,
+      high: <NotificationImportantIcon className={styles.redIcon} />,
+      medium: <StarRateIcon className={styles.yellowIcon} />,
+      low: <WarningAmberIcon className={styles.green} />,
+    };
+  
+    return priorityIcons[priority] || null;
   };
 
   const handleOpen = () => {
