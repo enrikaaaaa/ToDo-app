@@ -77,7 +77,7 @@ const Tasks = () => {
     return Math.round(durationInDays);
   };
 
-  const getPriorityIcon = (priority) => {
+   const getPriorityIcon = (priority) => {
     const priorityIcons = {
       important: <PriorityHighIcon className={styles.redIcon} />,
       high: <NotificationImportantIcon className={styles.redIcon} />,

@@ -8,6 +8,16 @@
     flex-direction: column;
     align-items: center;
   }
+  .redIcon {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+  .yellowIcon {
+    color: yellow;
+  }
 }
 .card {
   background-color: #f5f5f5;
@@ -32,9 +42,23 @@
     color: #452005;
   }
 
-
   .cardButtons {
     display: flex;
     gap: 1rem;
   }
+  .cardDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    div{
+      padding: 5px;
+      width: 50%;
+    }
+
+  }
+ 
+ 
 }
