@@ -1,5 +1,8 @@
 # Welcome to the To Do App!
 
+![image](https://github.com/enrikaaaaa/ToDo-app/assets/122116349/b098824c-764a-4871-b16f-948d6aa39d5b)
+
+
 ## Overview
 
 The To Do app simplifies task management by helping you monitor assigned tasks and categorize them as completed or pending.
