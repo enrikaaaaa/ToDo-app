@@ -39,3 +39,11 @@ npm run dev
 
 
 Open your browser and go to localhost - Enjoy!
+
+# What i used in My project?:
+Node.js
+Express.js
+React
+MongoDB
+
+
