@@ -19,6 +19,7 @@ const LoginForm = () => {
     try {
       const response = await loginUser(values);
       handleLogin(response);
+      localStorage.setItem('token', response.token);
     } catch (error) {
       alert('Error logging in. Please try again later.');
     }

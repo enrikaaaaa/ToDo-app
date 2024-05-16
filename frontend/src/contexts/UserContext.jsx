@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { ROUTES } from '../routes/consts';
 import { useNavigate } from 'react-router-dom';
 
-const UserContext = createContext();
+const UserContext = createContext({
+  authenticated: false,
+});
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -24,12 +26,12 @@ const UserProvider = ({ children }) => {
     setUser(null);
     setIsLoggedIn(false);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
   };
+  const authenticated = !!user;
 
   return (
     <UserContext.Provider
-      value={{ user, isLoggedIn, handleLogin, handleLogOut }}
+      value={{ user, isLoggedIn, handleLogin, handleLogOut, authenticated }}
     >
       {children}
     </UserContext.Provider>

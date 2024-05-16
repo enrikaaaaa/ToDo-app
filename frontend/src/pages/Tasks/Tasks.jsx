@@ -16,7 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import CreateNewTask from './CreateNewTask/CreateNewTask';
+import CreateNewTask from '../../components/CreateNewTask/CreateNewTask';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DoneIcon from '@mui/icons-material/Done';
 import { Modal } from '@mui/material';
@@ -78,18 +78,14 @@ const Tasks = () => {
   };
 
   const getPriorityIcon = (priority) => {
-    switch (priority) {
-      case 'important':
-        return <PriorityHighIcon className={styles.redIcon} />;
-      case 'high':
-        return <NotificationImportantIcon className={styles.redIcon} />;
-      case 'medium':
-        return <StarRateIcon className={styles.yellowIcon} />;
-      case 'low':
-        return <WarningAmberIcon className={styles.green} />;
-      default:
-        return null;
-    }
+    const priorityIcons = {
+      important: <PriorityHighIcon className={styles.redIcon} />,
+      high: <NotificationImportantIcon className={styles.redIcon} />,
+      medium: <StarRateIcon className={styles.yellowIcon} />,
+      low: <WarningAmberIcon className={styles.green} />,
+    };
+
+    return priorityIcons[priority] || null;
   };
 
   const handleOpen = () => {
@@ -197,14 +193,16 @@ const Tasks = () => {
               ])}
             </TableBody>
           </Table>
-         <div> <Button
-            startIcon={<AddIcon />}
-            variant="contained"
-            onClick={handleOpen}
-            className={styles.customButton}
-          >
-            Create New Task
-          </Button></div>
+          <div>
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              onClick={handleOpen}
+              className={styles.customButton}
+            >
+              Create New Task
+            </Button>
+          </div>
           <Modal
             open={open}
             onClose={handleClose}

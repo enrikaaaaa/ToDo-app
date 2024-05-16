@@ -15,8 +15,6 @@ const NavigationBar = () => {
   const user = storedUser ? JSON.parse(storedUser) : null;
   const navigate = useNavigate();
 
- 
-
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -42,24 +40,23 @@ const NavigationBar = () => {
           className={showMenu ? `${styles.menu} ${styles.show}` : styles.menu}
         >
           {navigationBarLinks.map((link) => (
-            <li key={link.path}  onClick={handleMenuItemClick}>
+            <li key={link.path} onClick={handleMenuItemClick}>
               <Link to={link.path}>{link.name}</Link>
             </li>
           ))}
         </ul>
 
         <div className={styles.hello}>
-         
-           
-         
           <div>Hello, {isLoggedIn ? user && user.Name : 'Guest'}!</div>
           <Button
-          className={`${styles.Button_root} ${isLoggedIn ? styles.LogOutButton_root : ''}`}
+            className={`${styles.Button_root} ${
+              isLoggedIn ? styles.LogOutButton_root : ''
+            }`}
             onClick={isLoggedIn ? handleLogOut : handleLogOut}
           >
             {isLoggedIn ? 'LogOut' : 'LogOut'}
           </Button>
-          </div>
+        </div>
       </nav>
     </header>
   );

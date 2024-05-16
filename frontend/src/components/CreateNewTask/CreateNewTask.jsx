@@ -1,16 +1,15 @@
 import * as Yup from 'yup';
 
+import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
-import { createTask } from '../../../api/tasks';
-import { fetchPriority } from '../../../api/priority';
-import { fetchUsers } from '../../../api/users';
-import styles from '../CreateNewTask/CreateNewTask.module.css';
+import { createTask } from '../../api/tasks';
+import { fetchPriority } from '../../api/priority';
+import { fetchUsers } from '../../api/users';
+import styles from './CreateNewTask.module.scss';
 
 const CreateNewTask = ({ handleClose, handleResetUsers }) => {
   const [priorityOptions, setPriorityOptions] = useState([]);
@@ -141,16 +140,17 @@ const CreateNewTask = ({ handleClose, handleResetUsers }) => {
                 </MenuItem>
               ))}
             </Select>
+            <Button
+              startIcon={<AddIcon />}
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={styles.submitButton}
+            >
+              Create Task
+            </Button>
           </Form>
         )}
-        <Button
-          startIcon={<AddIcon />}
-          type="submit"
-          variant="contained"
-          className={`${styles.Button_root} `}
-        >
-          Create Task
-        </Button>
       </Formik>
     </div>
   );
