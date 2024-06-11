@@ -13,10 +13,10 @@ app.use(cors());
 require("dotenv").config();
 const PORT = process.env.PORT || 8081;
 
+app.use(auth);
 app.use(userRoutes, verifyToken);
 app.use(tasksRoutes, verifyToken);
 app.use(priority, verifyToken);
-app.use(auth);
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT} port.`);

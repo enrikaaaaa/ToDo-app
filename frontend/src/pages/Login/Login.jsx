@@ -1,19 +1,28 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useContext, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { UserContext } from '../../contexts/UserContext';
 import { loginUser } from '../../api/users';
 import styles from './Login.module.scss';
-import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const { handleLogin } = useContext(UserContext);
+  const { handleLogin, authenticated } = useContext(UserContext);
 
   const initialValues = {
     Email: '',
     Password: '',
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authenticated) {
+      navigate('/tasks');
+    }
+  }, [authenticated, navigate]);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { ROUTES } from '../routes/consts';
@@ -14,6 +14,13 @@ const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInInitial);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const userFromLocalStorage = localStorage.getItem('user');
+    if (userFromLocalStorage) {
+      setUser(JSON.parse(userFromLocalStorage));
+    }
+  }, []);
+
   const handleLogin = (loginData) => {
     setUser(loginData.user);
     setIsLoggedIn(true);
@@ -26,6 +33,7 @@ const UserProvider = ({ children }) => {
     setUser(null);
     setIsLoggedIn(false);
     localStorage.removeItem('user');
+    navigate(ROUTES.LOGIN);
   };
   const authenticated = !!user;
 

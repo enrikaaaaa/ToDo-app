@@ -2,27 +2,22 @@ import { useContext, useState } from 'react';
 
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../routes/consts';
 import { UserContext } from '../../contexts/UserContext';
 import { navigationBarLinks } from '../../routes/consts';
 import styles from './NavigationBar.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 const NavigationBar = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, handleLogOut } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
-  const navigate = useNavigate();
+
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleLogOut = () => {
-    localStorage.removeItem('user');
-    navigate(ROUTES.LOGIN);
-  };
+
 
   const handleMenuItemClick = () => {
     setShowMenu(false);

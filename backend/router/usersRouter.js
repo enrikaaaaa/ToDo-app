@@ -2,7 +2,6 @@ const express = require("express");
 require("dotenv").config();
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
-const { verifyToken } = require("../middlewares/auth");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
@@ -63,6 +62,5 @@ router.delete("/users/:id", async (req, res) => {
     return res.status(500).send({ err });
   }
 });
-
 
 module.exports = router;

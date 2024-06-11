@@ -7,6 +7,7 @@ import { useContext } from 'react';
 
 const AppRoutes = () => {
   const { authenticated } = useContext(UserContext);
+  console.log(authenticated);
   return (
     <Routes>
       {routes.map(({ path, Layout, Component, isSecured }) => (
